@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Hobbies</title>
+    <meta name="description" content="Welcome to my hobbies website where I share my interests in photography, travel, painting, music, sports, and gaming.">
+    <meta name="keywords" content="Hobbies, Photography, Travel, Painting, Music, Sports, Gaming">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f3f6fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #4a90e2; /* Soft blue header */
+            color: #fff;
+            padding: 1.5em 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1.5px;
+            transition: transform 0.3s;
+        }
+
+        header h1:hover {
+            transform: scale(1.05);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #3b5998; /* Facebook blue color */
+            padding: 1em;
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        .navbar a:hover {
+            color: #f1c40f; /* Gold hover effect */
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(45, 201, 185, 0.93)), url('https://source.unsplash.com/1600x900/?nature') no-repeat center/cover;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 50px;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            margin-bottom: 1em;
+        }
+
+        .hero button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: #1f2833;
+            background: linear-gradient(135deg, #f1c40f, #e67e22);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.4s ease, transform 0.3s ease;
+        }
+
+        .hero button:hover {
+            background: linear-gradient(135deg, #8f4e15, #62605a);
+            transform: translateY(-4px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2em; /* Smaller font size on smaller screens */
+            }
+
+            .navbar {
+                flex-direction: column; /* Stack navbar items vertically */
+                gap: 1em; /* Reduce gap between items */
+            }
+
+            .hero h1 {
+                font-size: 2.5em; /* Adjust hero title size for smaller screens */
+            }
+
+            .hero button {
+                font-size: 1em; /* Adjust button size for smaller screens */
+                padding: 10px 20px; /* Adjust padding for smaller screens */
+            }
+        }
+
+        /* About Me Section */
+        .about-me {
+            text-align: center;
+            margin-top: 2rem;
+            color: #333;
+        }
+
+        .about-me img {
+            border-radius: 50%;
+            height: 150px;
+            width: 150px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .about-me p {
+            font-size: 1.1em;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1rem;
+            line-height: 1.8;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        /* Main Section with Flip Cards */
+        .hobby-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 1rem;
+        }
+
+        /* Flip Card Styling */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 320px;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .flip-card-front {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        .flip-card-front img {
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+        }
+
+        .flip-card-front h2 {
+            padding: 10px 0;
+            font-size: 1.6em;
+            color: #0a74da;
+        }
+
+        .flip-card-back {
+            background-color: #0a74da;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotateY(180deg);
+            padding: 20px;
+            font-size: 1.1em;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #4a90e2; /* Match footer color with header */
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Website</h1>
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#about">About Me</a>
+        <a href="#hobbies">Hobbies</a>
+    </nav>
+    
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to My Hobbies</h1>
+        <button onclick="window.location.href='#hobbies'">Explore</button>
+    </div>
+   
+    <!-- About Me Section -->
+    <section class="about-me" id="about">
+        <img src="/new3.jpg" alt="Profile picture of Aryan">
+        <p><strong>Hello, my name is Aryan. I am from Himachal Pradesh and currently pursuing my B.Tech in CSE at Lovely Professional University.</strong></p>
+    </section>
+
+    <!-- Main Content Section with Flip Cards -->
+    <section class="hobby-section" id="hobbies">
+        <!-- Hobby Flip Card 1 -->
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://wallpaperaccess.com/full/1640112.jpg" alt="Photography">
+                    <h2>Photography</h2>
+                </div>
+                <div class="flip-card-back">
+                    <p>I love capturing moments and landscapes through photography. It's a way for me to express my creativity.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hobby Flip Card 2 -->
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://th.bing.com/th/id/R.1c1b8c8219385a0f88a7b6cfcba712ab?rik=u9ceuWoncAl0iQ&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f08%2fFree-Desktop-Travel-Backgrounds.jpg&ehk=i2gnQlVtAUHLdjoM%2b5hVl%2bStT4ogWTYySuRp0cXXPnc%3d&risl=&pid=ImgRaw&r=0" alt="Travel">
+                    <h2>Travel</h2>
+                </div>
+                <div class="flip-card-back">
+                    <p>Traveling allows me to explore new cultures and meet interesting people. It's an enriching experience!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hobby Flip Card 3 -->
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://keralaschoolofarts.com/images/banner1-mob.webp" alt="Painting">
+                    <h2>Painting</h2>
+                </div>
+                <div class="flip-card-back">
+                    <p>Painting is my favorite pastime. It helps me unwind and express my emotions on canvas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hobby Flip Card 4 -->
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://images.nightcafe.studio/jobs/EJ5fdSfxPHXinxKPyBxR/EJ5fdSfxPHXinxKPyBxR--1--91a3k.jpg?tr=w-1600,c-at_max" alt="Music">
+                    <h2>Music</h2>
+                </div>
+                <div class="flip-card-back">
+                    <p>Music is a huge part of my life. I enjoy playing various instruments and discovering new genres.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hobby Flip Card 5 -->
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://thumbs.dreamstime.com/b/badminton-action-shuttlecock-fast-racket-motion-sport-167143422.jpg" alt="Sports">
+                    <h2>Sports</h2>
+                </div>
+                <div class="flip-card-back">
+                    <p>I love engaging in different sports, particularly badminton. It's a great way to stay active and have fun!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hobby Flip Card 6 -->
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://img.freepik.com/premium-photo/cyberpunk-gaming-controller-gamepad-joystick-illustration_691560-5812.jpg" alt="Gaming">
+                    <h2>Gaming</h2>
+                </div>
+                <div class="flip-card-back">
+                    <p>Gaming is not just a hobby; it's a passion. I love exploring virtual worlds and competing online.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Aryan. All rights reserved.</p>
+    </footer>
+</body>
+</html>
